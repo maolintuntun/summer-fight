@@ -1,3 +1,5 @@
+//how to implement the min() function when using stack with time O1
+
 package minstack;
 
 import java.util.Deque;
@@ -9,7 +11,7 @@ public class MinStack {
 
     public void push(int value) {
 	stack.push(value) ;
-           if( min.isEmpty() || value <= min.peek() ) { // when we haven’t put anything into min 
+           if( min.isEmpty() || value <= min.peek() ) { // when we havenâ€™t put anything into min 
  	      min.push( value ) ;
            }
 
