@@ -11,7 +11,7 @@ public class Main{
 		
 		stack1.push(12);
 		stack1.push(34);
-		stack1.push(1 );
+		stack1.push(1);
 		int temp;
 
 		while( !stack1.isEmpty())
