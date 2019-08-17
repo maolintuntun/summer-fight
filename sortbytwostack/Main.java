@@ -15,20 +15,20 @@ public class Main{
 		int temp;
 
 		while( !stack1.isEmpty())
-{
-temp = stack1.pop();
-while( !stack2.isEmpty() && temp < stack2.peek())
-{
-stack1.push(stack2.pop());
-}
-stack2.push(temp);
-}
+		{
+			temp = stack1.pop();
+			while( !stack2.isEmpty() && temp < stack2.peek())
+			{
+				stack1.push(stack2.pop());
+			}
+			stack2.push(temp);
+		}
 
 
 
-     while(!stack2.isEmpty())
-     {
-         System.out.println(stack2.pop());
-     }
-}
+		while(!stack2.isEmpty())
+		{
+			System.out.println(stack2.pop());
+		}
+	}
 }
