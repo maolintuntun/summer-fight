@@ -1,5 +1,8 @@
 delete a node in BST
 
+
+Problem1   binary tree traversal pre-order (iteratively)
+
 public class PreOrder
 {	// why list here? because return value is a list ? preorder is actually a list
 	public List<Integer> preOrder( TreeNode root )                      // 这里是preOreder
@@ -28,4 +31,86 @@ public class PreOrder
 		return preorder;
 	}
 }
+
+Problem2   binary tree traversal in-order (iteratively)
+
+public void inOrder(TreeNode root)
+{
+	if( root == null )
+	{
+		return;
+	}
+	Deque<TreeNode> stack = new LinkedList<>();
+	TreeNode helper = root;
+	while( helper != null || stack.isEmpty() )
+	{
+		if( helper != null )
+		{
+			stack.offerFirst( helper );
+			helper = helper.left;
+		} else {
+		   helper = stack.pollFirst();
+		   System.out.println( helper.value);     
+                                // print是否必须？？ 若返回值为list则 stack.add(helper.key)
+		   helper = helper.right;
+		}
+	}
+}
+
+Problem3   binary tree traversal post-order (iteratively) 非常巧妙了
+				
+public void postOrder(TreeNode root)
+{           //initial check
+if(root == null)
+{
+			return;
+}
+//local variables
+Deque<TreeNode> stack = new LinkedList<>();
+TreeNode prev = null;
+stack.offerFirst(root);  //root 放到stack里作栈顶元素记录所有等待访问的节点
+
+
+
+//3. 这里分3种情况讨论cur的来源和走向，每一种里面细分再讨论
+
+          while( !stack.isEmpty()) {
+		TreeNode cur = stack.peekFirst();
+		//going down
+                      // 情况1：
+                        如果上一个元素为null or 我是上一个元素左儿子 or 我是上一个的右儿子，即当前节点是从上面下来的（需要考虑1.左儿子不null 2. 左儿子null但右儿子不null 3.俩儿子都null）
+		if( prev == null || cur == prev.left || cur == prev.right)
+		{
+			//如果左边不为nall，把左边放进去
+if(cur.left != null){
+				stack.offerFirst(cur.left);
+			//左边为null，右边不为null，右边放进去
+			}else if(cur.right != null){
+				stack.offerFirst(cur.right);
+			//左右边都是null，把自己弹出来
+			}else {
+				stack.pollFirst();
+				//可以添加 打印
+			}
+} 
+//情况2：当前节点是从自己的左下方上来的(需要继续考虑右子女是否null
+else if ( prev == cur.left ) {
+	if( cur.right != null ){     //放入右儿子
+		stack.offerFirst(cur.right);
+	}else{
+	           stack.pollFirst();   //把自己吐出来
+	         }
+}
+//情况3：当前节点是从自己的右儿子上来的(那么左二子一定走过了，不用看了,直接弹出自己
+else if （prev == cur.right) {
+         stack.pollFirst();
+}
+
+prev = cur;  这里的prev是cur1, 而目前的栈顶已经变了，故接下来的cur2即peek栈顶也变，所以下一轮的开始 就是由栈顶元素cur2与prev的关系 确定下一步怎么做
+
+ 	} // 封好while 
+}
+
+
+
 
